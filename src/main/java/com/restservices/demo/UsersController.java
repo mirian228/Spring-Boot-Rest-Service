@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsersController {
 
 	@GetMapping()
-	public String getUsers() {
-		return "http GET request was sent";
+	public String getUsers(@RequestParam(value = "page") int page, @RequestParam(value = "limit") int limit) {
+		return "http GET request was sent for page:" + page + "and limit is:" + limit;
 	}
 
 	@GetMapping(path = "/{userId}")
