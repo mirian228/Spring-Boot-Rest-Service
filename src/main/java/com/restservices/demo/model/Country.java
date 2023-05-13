@@ -6,6 +6,16 @@ public class Country {
 	private String countryName;
 	private String countryCapital;
 
+	public Country() {
+		super();
+	}
+
+	public Country(String countryName, String countryCapital) {
+		super();
+		this.countryName = countryName;
+		this.countryCapital = countryCapital;
+	}
+
 	public Country(int id, String countryName, String countryCapital) {
 		super();
 		this.id = id;

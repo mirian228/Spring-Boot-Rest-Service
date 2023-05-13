@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.restservices.demo.controllers.AddResponse;
 import com.restservices.demo.model.Country;
 
+@Component
 public class CountryService {
 
 	static HashMap<Integer, Country> countryIdMap;
@@ -15,8 +18,8 @@ public class CountryService {
 		countryIdMap = new HashMap<Integer, Country>();
 
 		Country indiaCountry = new Country(1, "India", "Delhi");
-		Country usaCountry = new Country(1, "USA", "Washington");
-		Country ukCountry = new Country(1, "UK", "London");
+		Country usaCountry = new Country(2, "USA", "Washington");
+		Country ukCountry = new Country(3, "UK", "London");
 
 		countryIdMap.put(1, indiaCountry);
 		countryIdMap.put(2, usaCountry);
@@ -34,21 +37,20 @@ public class CountryService {
 	}
 
 	public Country getCountryByName(String name) {
-		String countryName = null;
-		int i;
-		Country result = null;
-		for (i = 0; i < countryIdMap.size(); i++) {
-			countryName = countryIdMap.get(i).getCountryName();
-			if (countryName == name) {
-				result = countryIdMap.get(i);
+		Country country = null;
+		for (int i : countryIdMap.keySet()) {
+			if (countryIdMap.get(i).getCountryName().equals(name)) {
+				country = countryIdMap.get(i);
 			}
 		}
+		return country;
 
-		return result;
 	}
 
 	public Country addCountry(Country country) {
-		return countryIdMap.put(getMaxId(), country);
+		country.setId(getMaxId());
+		countryIdMap.put(getMaxId(), country);
+		return country;
 	}
 
 	// Utility Method to get max id
