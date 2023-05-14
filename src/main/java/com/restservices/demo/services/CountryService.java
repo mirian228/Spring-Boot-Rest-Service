@@ -26,7 +26,7 @@ public class CountryService {
 	}
 
 	public Country getCountryById(int id) {
-		return countryRepository.getReferenceById(id);
+		return countryRepository.findById(id).get();
 	}
 
 	public Country getCountryByName(String name) {
