@@ -1,4 +1,4 @@
- package com.restservices.demo.controllers;
+package com.restservices.demo.controllers;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class CountryController {
 		try {
 			List<Country> countries = countryService.getAllCountries();
 			return new ResponseEntity<List<Country>>(countries, HttpStatus.FOUND);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
@@ -79,7 +79,7 @@ public class CountryController {
 
 	@DeleteMapping(path = "/deletecountry/{id}")
 	public AddResponse deleteCountry(@PathVariable(value = "id") int id) {
-		return countryService.deleteCountry(id);
+		return countryService.deleteCountryById(id);
 	}
 
 }

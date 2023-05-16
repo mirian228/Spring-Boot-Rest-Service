@@ -26,7 +26,16 @@ public class CountryService {
 	}
 
 	public Country getCountryById(int id) {
-		return countryRepository.findById(id).get();
+		List<Country> countries = countryRepository.findAll();
+		Country country = null;
+
+		for (Country con : countries) {
+			if (con.getId() == id) {
+				country = con;
+			}
+		}
+		return country;
+
 	}
 
 	public Country getCountryByName(String name) {
@@ -56,12 +65,17 @@ public class CountryService {
 		return country;
 	}
 
-	public AddResponse deleteCountry(int id) {
+	public void deleteCountry(Country country) {
+		countryRepository.delete(country);
+
+	}
+
+	public AddResponse deleteCountryById(int id) {
 		countryRepository.deleteById(id);
 		AddResponse response = new AddResponse();
 		response.setMessage("Country removed from database");
 		response.setId(id);
-		
+
 		return response;
 	}
 }
