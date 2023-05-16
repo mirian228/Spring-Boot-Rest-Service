@@ -1,4 +1,4 @@
-package com.restservices.demo.controllers;
+ package com.restservices.demo.controllers;
 
 import java.util.List;
 
@@ -28,8 +28,13 @@ public class CountryController {
 	}
 
 	@GetMapping(path = "/getcountries")
-	public List<Country> getCountries() {
-		return countryService.getAllCountries();
+	public ResponseEntity<List<Country>> getCountries() {
+		try {
+			List<Country> countries = countryService.getAllCountries();
+			return new ResponseEntity<List<Country>>(countries, HttpStatus.FOUND);
+		} catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 	@GetMapping(path = "/getcountries/{id}")
